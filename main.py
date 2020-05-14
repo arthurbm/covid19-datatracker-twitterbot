@@ -1,15 +1,21 @@
 from covid_data import *
+import tweepy
+from twitterKeys import *
+from format_data import estados
 
-uf = input('Digite o UF do estado: \n')
-city = input('Digite a cidade: \n')
-text_state, discionario = dados_covid_estado(uf)
-text_city, dict_city = dados_covid_city(uf,city)
-text_states, dict_states = dados_covid_estados()
-print(text_state)
-print(text_city)
-print('Estados nordestinos:\n')
+#Count deve ser um inteiro
 
+def tweetar_dados_nordeste():
+    states = estados(5, lista_siglas_nordeste)
+    api.update_status(status= 'Estados mais graves nordeste: \n\n' + states)
 
-for text_local, dict_local in zip(text_states, dict_states):
-    if dict_local['uf'] in lista_siglas_nordeste:
-        print(text_local)
+def tweetar_dados_estados():
+    states = estados(5, lista_siglas)
+    api.update_status(status= 'Estados mais graves Brasil: \n\n' + states)
+
+#Chaves estão ocultadas
+auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+auth.set_access_token(ACESS_KEY, ACESS_SECRET)
+api = tweepy.API(auth)
+
+tweetar_dados_nordeste()
