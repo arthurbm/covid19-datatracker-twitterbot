@@ -72,7 +72,16 @@ def dados_covid_cidades(state):
     return data_today_sorted
     
 #O horári UTC é 3 horas a mais em relação a brasília
-#'https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/pe'
+
+def dados_estados_gov():
+    url = 'https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalEstado'
+
+    response = requests.request('GET', url)
+    data_today_full = response.json()
+
+    return data_today_full
+
+
 
 ##############################################################################################################
 
