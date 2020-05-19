@@ -8,6 +8,8 @@ def estados_gov(count, region_list):
     count2 = 1
 
     for dict_local in dict_states:
+        if count <= 0:
+            break
         if (dict_local['nome'] in region_list):
             text += (
                 textwrap.dedent(
@@ -96,8 +98,15 @@ def estados(count, region_list):
 
 def cidades(count, state):
     dict_cities = dados_covid_cidades(state)
+    dict_states = dados_estados_gov()
     count2 = 1
-    text = ''
+
+    for dict_state_local in dict_states:
+        if dict_state_local['nome'] == (state.upper()):
+            dict_state_unico = dict_state_local
+
+    text = f'Nº de Casos: {dict_state_unico["casosAcumulado"]}\nNº de Óbitos: {dict_state_unico["obitosAcumulado"]}\n\n'
+
     for dict_local in dict_cities:
         if count <= 0:
                 break
