@@ -87,5 +87,3 @@ def reply():
             store_last_seen(arquivo_id_tweet, tweet.id)
 
 #RESPONDENDO TWEETS
-
-
