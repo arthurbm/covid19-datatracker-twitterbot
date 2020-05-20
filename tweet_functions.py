@@ -1,6 +1,5 @@
 from covid_data import *
 import tweepy
-from twitterKeys import *
 from format_data import *
 from siglas import *
 import os
