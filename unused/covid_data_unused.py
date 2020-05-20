@@ -46,56 +46,6 @@ def dados_covid_estado(uf):
     
     return text, data_today
 
-def dados_covid_city(state,city):
-    url = 'https://brasil.io/api/dataset/covid19/caso/data/'
-    params = {
-        "format": "json",
-        "state": state.upper(),
-        "city": city.capitalize(),
-        "place_type": "city",
-        "is_last": "True",
-    }
-    response = requests.request('GET', url, params=params)
-    data_today_complete = response.json()
-
-    data_today = (data_today_complete['results'])[0]
-
-    #Pegando a data de ontem
-    x = time.strptime(data_today['date'], '%Y-%m-%d')
-    day_last_atualization = datetime.fromtimestamp(mktime(x))
-    yesterday = day_last_atualization - timedelta(days=1)
-    yesterday = yesterday.strftime('%Y-%m-%d')
-
-    paramsYest = {
-        "format": "json",
-        "state": state.upper(),
-        "city": city.capitalize(),
-        "place_type": "city",
-        "date": yesterday,
-    }
-    responseYest = requests.request('GET', url, params=paramsYest)
-    data_yest_complete = responseYest.json()
-
-    data_yest = (data_yest_complete['results'])[0]
-
-    data_today['new_cases'] = data_today['confirmed'] - data_yest['confirmed']
-    data_today['new_deaths'] = data_today['deaths'] - data_yest['deaths']
-    
-    if data_today['new_cases'] == 0:
-        data_today['new_cases'] = 'Não relatado'
-        data_today['new_deaths'] = 'Não relatado'
-
-    text = (
-        'Cidade: ' + data_today['city'] + '\n' + 
-        'Nº de casos: ' + str(data_today['confirmed']) +'\n' +
-        'Novos casos hoje: ' + str(data_today['new_cases']) + '\n' +
-        'Nº de óbitos: ' + str(data_today['deaths']) + '\n' +
-        'Novos óbitos hoje: ' + str(data_today['new_deaths']) + '\n' +
-        'índice de mortalidade: ' + str(format( data_today['death_rate'], ".2%")) + '\n'
-        'Última atualização: ' + (data_today['date']) + '\n'
-    )
-    return text, data_today
-
 #Vou ter que varrer os dados de yesterday, porque não dá pra passar query params
 def dados_covid_estados():
     url = 'https://covid19-brazil-api.now.sh/api/report/v1'

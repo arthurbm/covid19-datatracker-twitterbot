@@ -26,6 +26,21 @@ def estados_gov(count, region_list):
     return text
 #Usado para mostrar os principais estados em cada região
 
+def cidade_gov(city):
+    dict_city = dados_covid_city_gov(city)
+
+    text = (
+        textwrap.dedent(
+            f"""
+            Cidade: {dict_city['nome']}
+            Número de casos: {dict_city['casosAcumulado']}
+            Número de óbitos: {dict_city['obitosAcumulado']}
+            """
+        )
+    )
+
+    return text
+
 def cidades(count, state):
     dict_cities = dados_covid_cidades(state)
     dict_states = dados_estados_gov()
