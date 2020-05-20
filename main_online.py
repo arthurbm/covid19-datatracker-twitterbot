@@ -1,3 +1,5 @@
 from tweet_functions import *
 
-reply()
+while True:
+    reply()
+    time.sleep(15)
