@@ -19,11 +19,11 @@ api = tweepy.API(auth)
 def tweetar_dados_regiao(count, list_regiao, nome_regiao):
     try:
         states = estados_gov(count, list_regiao)
-        api.update_status(status= f'Estados mais afetados pelo #coronavirus na região {nome_regiao}: {today}\n\n' + states)
+        api.update_status(status= f'Estados mais afetados pelo #coronavirus na região {nome_regiao}: {today}\n' + states)
         print(f'Sucesso região {nome_regiao}')
     except:
         states = estados_gov((count-1), lista_siglas)
-        api.update_status(status = f'Estados mais afetados pelo #coronavirus na região {nome_regiao}:{today}\n\n' + states)
+        api.update_status(status = f'Estados mais afetados pelo #coronavirus na região {nome_regiao}:{today}\n' + states)
         print(f'Sucesso com excesso região {nome_regiao}')
 
 def tweetar_dados_estados_geral(count):

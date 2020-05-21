@@ -3,8 +3,21 @@ from siglas import dict_siglas
 
 def estados_gov(count, region_list):
     dict_states = dados_estados_gov()
+    dict_sintese = (dados_covid_sintese())[1:]
     text = ''
     count2 = 1
+
+    for dict_sintese_local in dict_sintese:
+        if dict_sintese_local['_id'] in region_list:
+            text+= (
+                textwrap.dedent(
+                    f"""
+                    Casos: {dict_sintese_local['casosAcumulado']}
+                    Óbitos: {dict_sintese_local['obitosAcumulado']}
+
+                    """
+                )
+            )
 
     for dict_local in dict_states:
         if count <= 0:

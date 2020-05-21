@@ -28,7 +28,7 @@ dict_siglas = {
     'TO': 'Tocantins'
 }
 lista_siglas = ['AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO']
-lista_siglas_nordeste = ['MA', 'PI', 'PB', 'PE', 'CE', 'BA', 'AL', 'SE', 'RN']
+lista_siglas_nordeste = ['CE','PE','BA','MA', 'PI', 'PB', 'AL', 'SE', 'RN']
 lista_siglas_norte = ['AM', 'AP', 'RR', 'PA', 'TO', 'RO', 'AC']
 lista_siglas_sudeste = ['SP', 'RJ', 'ES', 'MG']
 lista_siglas_sul = ['PR', 'RS', 'SC']
