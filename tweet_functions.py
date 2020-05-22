@@ -10,7 +10,7 @@ today = str(datetime.now().day) + "/" + datetime.now().strftime('%m')
 CONSUMER_KEY_ONLINE = environ['CONSUMER_KEY']
 CONSUMER_SECRET_ONLINE = environ['CONSUMER_SECRET']
 ACESS_KEY_ONLINE = environ['ACESS_KEY']
-ACESS_SECRET_ONLINE = environ['ACESS_SECREY']
+ACESS_SECRET_ONLINE = environ['ACESS_SECRET']
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY_ONLINE, CONSUMER_SECRET_ONLINE)
 auth.set_access_token(ACESS_KEY_ONLINE, ACESS_SECRET_ONLINE)
