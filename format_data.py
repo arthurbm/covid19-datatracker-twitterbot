@@ -1,19 +1,19 @@
 from covid_data import *
 from siglas import dict_siglas
 
-def estados_gov(count, region_list):
+def estados_gov(count, region_list, region_name=None):
     dict_states = dados_estados_gov()
     dict_sintese = (dados_covid_sintese())[1:]
     text = ''
     count2 = 1
 
     for dict_sintese_local in dict_sintese:
-        if dict_sintese_local['_id'] in region_list:
+        if dict_sintese_local['_id'] == region_name:
             text+= (
                 textwrap.dedent(
                     f"""
-                    Casos: {dict_sintese_local['casosAcumulado']}
-                    Óbitos: {dict_sintese_local['obitosAcumulado']}
+                    Nº de Casos: {dict_sintese_local['casosAcumulado']}
+                    Nº de Óbitos: {dict_sintese_local['obitosAcumulado']}
 
                     """
                 )

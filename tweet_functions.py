@@ -10,7 +10,7 @@ today = str(datetime.now().day) + "/" + datetime.now().strftime('%m')
 CONSUMER_KEY_ONLINE = environ['CONSUMER_KEY']
 CONSUMER_SECRET_ONLINE = environ['CONSUMER_SECRET']
 ACESS_KEY_ONLINE = environ['ACESS_KEY']
-ACESS_SECRET_ONLINE = environ['ACESS_SECRET']
+ACESS_SECRET_ONLINE = environ['ACESS_SECREY']
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY_ONLINE, CONSUMER_SECRET_ONLINE)
 auth.set_access_token(ACESS_KEY_ONLINE, ACESS_SECRET_ONLINE)
@@ -18,12 +18,12 @@ api = tweepy.API(auth)
 
 def tweetar_dados_regiao(count, list_regiao, nome_regiao):
     try:
-        states = estados_gov(count, list_regiao)
-        api.update_status(status= f'Estados mais afetados pelo #coronavirus na região {nome_regiao}: {today}\n' + states)
+        states = estados_gov(count, list_regiao, nome_regiao)
+        api.update_status(status= f'Estados mais afetados pelo #coronavirus na região {nome_regiao}: {today}' + states)
         print(f'Sucesso região {nome_regiao}')
     except:
-        states = estados_gov((count-1), lista_siglas)
-        api.update_status(status = f'Estados mais afetados pelo #coronavirus na região {nome_regiao}:{today}\n' + states)
+        states = estados_gov((count-1), lista_siglas, nome_regiao)
+        api.update_status(status = f'Estados mais afetados pelo #coronavirus na região {nome_regiao}:{today}' + states)
         print(f'Sucesso com excesso região {nome_regiao}')
 
 def tweetar_dados_estados_geral(count):
