@@ -106,3 +106,11 @@ def dados_covid_city_gov(city):
             break
     
     return data_city
+
+def dados_covid_city_gov_full():
+    url = 'https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalMunicipio'
+
+    response = requests.request('GET', url)
+    data_today_complete = response.json()
+    
+    return data_today_complete

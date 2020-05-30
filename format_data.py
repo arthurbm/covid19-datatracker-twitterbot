@@ -55,7 +55,8 @@ def cidade_gov(city):
     return text
 
 def cidades(count, state):
-    dict_cities = dados_covid_cidades(state)
+    dict_cities_brasil_io = dados_covid_cidades(state)
+    dict_cities_gov = dados_covid_city_gov_full()
     dict_states = dados_estados_gov()
     count2 = 1
 
@@ -65,15 +66,28 @@ def cidades(count, state):
 
     text = f'Nº de Casos: {dict_state_unico["casosAcumulado"]}\nNº de Óbitos: {dict_state_unico["obitosAcumulado"]}\n\n'
 
-    for dict_local in dict_cities:
+    for dict_city_brasil_io in dict_cities_brasil_io:
         if count <= 0:
                 break
-        text += (textwrap.dedent(
-            f"""
-            {count2}) {dict_local['city']}
-            Casos: {str(dict_local['confirmed'])}
-            Óbitos: {str(dict_local['deaths'])}
-            """
+
+        dict_city_gov_unico = {}
+        #Procuro na API do governo a cidade que está senndo analizada no respectivo loop da Brail io
+        for dict_city_gov in dict_cities_gov:
+            if dict_city_gov['nome'] == dict_city_brasil_io['city']:
+                dict_city_gov_unico = dict_city_gov
+                break
+
+        #Estou fazendo isso para o caso de ele não achar a cidade
+        if dict_city_gov_unico == {}:
+            continue
+
+        text += (
+            textwrap.dedent(
+                f"""
+                {count2}) {dict_city_gov_unico['nome']}
+                Casos: {dict_city_gov_unico['casosAcumulado']}
+                Óbitos: {dict_city_gov_unico['obitosAcumulado']}
+                """
             )
         )
         count -=1
@@ -81,71 +95,4 @@ def cidades(count, state):
 
     return text
 
-def estados(count, region_list):
-    dict_states = dados_covid_estados_brasilio()
-    text = ''
-    count2 = 1
-    count_desatualizados = 0
-    count_erro = 0
-    count_atualizados = 0
-    estados_desatalizados = []
-    estados_erro = []
-    estados_atualizados = []
 
-    for dict_local in dict_states:
-        if count <= 0:
-            break
-        if (dict_local['state'] in region_list):
-            try:
-                if dict_local['new_cases'] != 0:
-                    text += (textwrap.dedent(
-                            f"""
-                            {count2}) {dict_siglas[dict_local['state']]}:
-                            Casos: {str(dict_local['confirmed'])} ({str(dict_local['new_cases'])} novos)
-                            Óbitos: {str(dict_local['deaths'])} ({str(dict_local['new_deaths'])} novas)
-
-                            """
-                        )
-                    )
-                    count -= 1
-                    count2 +=1
-                    count_atualizados +=1
-                    estados_atualizados.append(dict_siglas[dict_local['state']])
-                #Casos de estados que não foram atualizados
-                else:
-                    text += (textwrap.dedent(
-                            f"""
-                            {count2}) {dict_siglas[dict_local['state']]}:
-                            Casos: {str(dict_local['confirmed'])}
-                            Óbitos: {str(dict_local['deaths'])}
-
-                            """
-                        )
-                    )
-                    count -= 1
-                    count2 +=1
-                    count_desatualizados +=1
-                    estados_desatalizados.append(dict_siglas[dict_local['state']])
-            #Estados que não tem o new cases e new deaths por algum motivo
-            except:
-                text += (textwrap.dedent(
-                        f"""
-                        {count2}) {dict_siglas[dict_local['state']]}:
-                        Casos: {str(dict_local['confirmed'])}
-                        Óbitos: {str(dict_local['deaths'])}
-
-                        """
-                    )
-                )
-                count -= 1
-                count2 +=1
-                count_erro +=1
-                estados_erro.append(dict_siglas[dict_local['state']])
-    #text_array = text.split('\n\n')
-    
-    text_array = text.split('\n\n')
-    print(f'Número de estados sem atualização: {count_desatualizados}\nEstados desatualizados: {estados_desatalizados}\n')
-    print(f'Número de estados atualizados: {count_atualizados}\nEstados atualizados: {estados_atualizados}\n')
-    print(f'Número de estados com erro: {count_erro}\nEstados desatualizados: {estados_erro}\n')
-    
-    return text
