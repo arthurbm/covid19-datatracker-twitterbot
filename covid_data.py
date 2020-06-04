@@ -101,7 +101,7 @@ def dados_covid_city_gov(city):
     data_city = {}
 
     for data_city_local in data_today_complete:
-        if data_city_local['nome'] == city.capitalize():
+        if (data_city_local['nome']).lower() == city.lower():
             data_city = data_city_local
             break
     

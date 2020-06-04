@@ -61,6 +61,7 @@ def main_tweet():
             tweetar_dados_cidades(3, lista_estados_local, last_tweet_id)
 
 arquivo_id_tweet = 'last_seen.txt'
+fila_last_city = 'last_city.txt'
 
 def read_last_seen(FILE_NAME):
     file_read = open(FILE_NAME, 'r')
@@ -73,16 +74,30 @@ def store_last_seen(FILE_NAME, last_seen_id):
     file_write.write(str(last_seen_id))
     file_write.close()
 
+def store_city(FILE_NAME, city):
+    file_write = open(FILE_NAME, 'w')
+    file_write.write(str(city))
+    file_write.close()
+
 def reply():
     tweets = api.mentions_timeline(read_last_seen(arquivo_id_tweet), tweet_mode = 'extended')
     for tweet in tweets:
         if '#covid19brasil' in tweet.full_text.lower():
             print(str(tweet.id) + '-' + tweet.full_text)
-            text_splited = (tweet.full_text).split()
+            text_splited = (tweet.full_text.lower()).split('#covid19brasil')
             city = text_splited[-1]
+
+            if city[0] == ' ':
+                city.pop(0)
+            
             print(city)
-            text_city = cidade_gov(city)
-            api.update_status(f"@{tweet.user.screen_name} {text_city}", tweet.id)
-            store_last_seen(arquivo_id_tweet, tweet.id)
+            try:
+                text_city = cidade_gov(city)
+                api.update_status(f"@{tweet.user.screen_name} {text_city}", tweet.id)
+                store_city(arquivo_id_tweet, city)
+                store_last_seen(arquivo_id_tweet, tweet.id)
+            except:
+                api.update_status('Cidade não encontrada, talvez haja erro de digitação, tente novamente')
+                store_last_seen(arquivo_id_tweet, tweet.id)
 
 #RESPONDENDO TWEETS
