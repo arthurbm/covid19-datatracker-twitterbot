@@ -88,7 +88,7 @@ def reply():
             city = text_splited[-1]
 
             if city[0] == ' ':
-                city.pop(0)
+                city = city[1:]
             
             print(city)
             try:
