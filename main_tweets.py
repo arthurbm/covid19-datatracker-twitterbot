@@ -11,5 +11,5 @@ def test_results_thread():
     for some_tweet in last_tweets:
         print(f"Id: {some_tweet.id}\nText: {some_tweet.text}\n")
 
-#RODANDO AS FUNÇÕES
+#RODANDO A FUNÇÃO
 main_tweet()

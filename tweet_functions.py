@@ -91,13 +91,9 @@ def reply():
                 city = city[1:]
             
             print(city)
-            try:
-                text_city = cidade_gov(city)
-                api.update_status(f"@{tweet.user.screen_name} {text_city}", tweet.id)
-                store_city(arquivo_id_tweet, city)
-                store_last_seen(arquivo_id_tweet, tweet.id)
-            except:
-                api.update_status('Cidade não encontrada, talvez haja erro de digitação, tente novamente')
-                store_last_seen(arquivo_id_tweet, tweet.id)
+            text_city = cidade_gov(city)
+            api.update_status(f"@{tweet.user.screen_name} {text_city}", tweet.id)
+            store_city(arquivo_id_tweet, city)
+            store_last_seen(arquivo_id_tweet, tweet.id)
 
 #RESPONDENDO TWEETS
