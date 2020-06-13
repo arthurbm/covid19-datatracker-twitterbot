@@ -60,7 +60,7 @@ def main_tweet():
             last_tweet_id = last_tweet_full.id
             tweetar_dados_cidades(3, lista_estados_local, last_tweet_id)
 
-arquivo_id_tweet = 'last_seen.txt'
+file_id_tweet = 'last_seen.txt'
 file_last_city = 'last_city.txt'
 
 def read_last_seen(FILE_NAME):
@@ -80,7 +80,7 @@ def store_city(FILE_NAME, city):
     file_write.close()
 
 def reply():
-    tweets = api.mentions_timeline(read_last_seen(arquivo_id_tweet), tweet_mode = 'extended')
+    tweets = api.mentions_timeline(read_last_seen(file_id_tweet), tweet_mode = 'extended')
     for tweet in tweets:
         if '#covid19brasil' in tweet.full_text.lower():
             print(str(tweet.id) + '-' + tweet.full_text)
@@ -95,7 +95,7 @@ def reply():
                 text_city = cidade_gov(city)
                 api.update_status(f"@{tweet.user.screen_name} {text_city}", tweet.id)
                 store_city(file_last_city, city)
-                store_last_seen(arquivo_id_tweet, tweet.id)
+                store_last_seen(file_id_tweet, tweet.id)
             except:
                 pass
 
