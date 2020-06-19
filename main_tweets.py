@@ -12,8 +12,8 @@ def test_results_thread():
         print(f"Id: {some_tweet.id}\nText: {some_tweet.text}\n")
 
 #RODANDO A FUNÇÃO
-one_day = 60 * 60 * 24
 
 while True:
+    one_day = 60 * 60 * 24
     main_tweet()
     time.sleep(one_day)
