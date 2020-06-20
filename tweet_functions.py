@@ -97,7 +97,6 @@ def reply():
                 store_city(file_last_city, city)
                 store_last_seen(file_id_tweet, tweet.id)
             except:
-                api.update_status("Cidade não encontrada cheque se o nome foi digitado corretamente :)")
                 store_last_seen(file_id_tweet, tweet.id)
 
 #RESPONDENDO TWEETS
