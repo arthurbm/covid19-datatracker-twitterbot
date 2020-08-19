@@ -13,7 +13,7 @@ def test_results_timeline():
 
 #RODANDO A FUNÇÃO
 
-test_results()
+#test_results()
 
 #while True:
 #    one_day = 60 * 60 * 24
