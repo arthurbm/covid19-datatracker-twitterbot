@@ -13,9 +13,7 @@ def test_results_timeline():
 
 #RODANDO A FUNÇÃO
 
-test_results()
-
-#while True:
-#    one_day = 60 * 60 * 24
-#    main_tweet()
-#    time.sleep(one_day)
+while True:
+    one_day = 60 * 60 * 24
+    main_tweet()
+    time.sleep(one_day)
