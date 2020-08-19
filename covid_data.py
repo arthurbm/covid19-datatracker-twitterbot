@@ -10,6 +10,7 @@ def yesterday_string_to_datetime(data_string):
     yesterday = day_last_atualization - timedelta(days=1)
     return yesterday
 
+#Usa a API do Site covid19.gov.br para retornar os dados dos estados
 def dados_estados_gov():
     url = 'https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalEstado'
 
@@ -18,6 +19,7 @@ def dados_estados_gov():
 
     return data_today_full
 
+#Usa a API do Site covid19.gov.br, é usada para pegar os dados por região
 def dados_covid_sintese():
     url = 'https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalSintese'
 
@@ -26,6 +28,7 @@ def dados_covid_sintese():
 
     return data_today_full
 
+#Usa a API do Brasil IO e retorna os dados por estado
 def dados_covid_estados_brasilio():
     url = 'https://brasil.io/api/dataset/covid19/caso/data/'
     params = {
@@ -69,6 +72,7 @@ def dados_covid_estados_brasilio():
 
     return data_today_sorted
 
+#Usa a APi do Brasil IO e retorna os dados por cidade
 def dados_covid_cidades(state):
     url = 'https://brasil.io/api/dataset/covid19/caso/data/'
     params = {
@@ -91,6 +95,7 @@ def dados_covid_cidades(state):
 #O horári UTC é 3 horas a mais em relação a brasília
 
 ##############################################################################################################
+#Inutilizadas:
 
 def dados_covid_city_gov(city):
     url = 'https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalMunicipio'

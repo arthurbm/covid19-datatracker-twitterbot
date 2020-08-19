@@ -1,6 +1,7 @@
 from covid_data import *
 from siglas import dict_siglas
 
+#Usado para mostrar os principais estados em cada região
 def estados_gov(count, region_list, region_name=None):
     dict_states = dados_estados_gov()
     dict_sintese = (dados_covid_sintese())[1:]
@@ -37,9 +38,9 @@ def estados_gov(count, region_list, region_name=None):
             count2 +=1
     
     return text
-#Usado para mostrar os principais estados em cada região
 
-def cidade_gov(city):
+#Usado para retornar os dados de apenas uma cidade
+def cidade(city):
     dict_city = dados_covid_city_gov(city)
 
     text = (
@@ -71,7 +72,7 @@ def cidades(count, state):
                 break
 
         dict_city_gov_unico = {}
-        #Procuro na API do governo a cidade que está senndo analizada no respectivo loop da Brail io
+        #Procuro na API do governo a cidade que está sendo analizada no respectivo loop da Brail io
         for dict_city_gov in dict_cities_gov:
             if dict_city_gov['nome'] == dict_city_brasil_io['city']:
                 dict_city_gov_unico = dict_city_gov

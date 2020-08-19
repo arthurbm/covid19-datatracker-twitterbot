@@ -87,13 +87,13 @@ def reply():
             text_splited = (tweet.full_text.lower()).split('#covid19brasil')
             city = text_splited[-1]
 
-            if city[0] == ' ':
+            while city[0] == ' ':
                 city = city[1:]
             
             print(city)
             try:
-                text_city = cidade_gov(city)
-                api.update_status(f"@{tweet.user.screen_name} {text_city}", tweet.id)
+                text_city = cidade(city)
+                api.update_status(f"@{tweet.user.screen_name} Data: {today} {text_city}", tweet.id)
                 store_city(file_last_city, city)
                 store_last_seen(file_id_tweet, tweet.id)
             except:
