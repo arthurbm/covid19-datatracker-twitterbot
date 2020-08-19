@@ -4,8 +4,13 @@ from format_data import *
 from siglas import *
 import os
 from os import environ
+import pytz
 
-today = str(datetime.now().day) + "/" + datetime.now().strftime('%m')
+tz = pytz.timezone('America/Recife')
+recife_now = datetime.now(tz)
+
+today = str(recife_now.day) + "/" + recife_now.strftime('%m')
+current_time = recife_now.strftime("%H:%M:%S")
 
 CONSUMER_KEY_ONLINE = environ['CONSUMER_KEY']
 CONSUMER_SECRET_ONLINE = environ['CONSUMER_SECRET']
@@ -94,7 +99,7 @@ def reply():
             print(city)
             try:
                 text_city = cidade(city)
-                api.update_status(f"@{tweet.user.screen_name} Data: {today} {text_city}", tweet.id)
+                api.update_status(f"@{tweet.user.screen_name} Data: {today}\nHora: {current_time} {text_city}", tweet.id)
                 store_city(file_last_city, city)
                 store_last_seen(file_id_tweet, tweet.id)
             except:
