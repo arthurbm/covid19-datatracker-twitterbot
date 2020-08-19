@@ -1,4 +1,4 @@
-from tweet_functions import reply
+from tweet_functions import *
 
 while True:
     reply()
