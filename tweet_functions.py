@@ -79,6 +79,7 @@ def store_city(FILE_NAME, city):
     file_write.write(str(city))
     file_write.close()
 
+#RESPONDENDO TWEETS
 def reply():
     tweets = api.mentions_timeline(read_last_seen(file_id_tweet), tweet_mode = 'extended')
     for tweet in tweets:
@@ -99,4 +100,3 @@ def reply():
             except:
                 store_last_seen(file_id_tweet, tweet.id)
 
-#RESPONDENDO TWEETS
