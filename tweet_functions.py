@@ -99,7 +99,7 @@ def reply():
             print(city)
             try:
                 text_city = cidade(city)
-                api.update_status(f"@{tweet.user.screen_name} Data: {today}\nHora: {current_time} {text_city}", tweet.id)
+                api.update_status(f"@{tweet.user.screen_name} Data: {today}\nHorário: {current_time}\n{text_city}", tweet.id)
                 store_city(file_last_city, city)
                 store_last_seen(file_id_tweet, tweet.id)
             except:
