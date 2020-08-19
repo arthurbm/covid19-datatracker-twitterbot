@@ -99,4 +99,3 @@ def reply():
                 store_last_seen(file_id_tweet, tweet.id)
             except:
                 store_last_seen(file_id_tweet, tweet.id)
-
